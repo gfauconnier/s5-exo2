@@ -1,0 +1,38 @@
+.box
+{
+    display: flex;
+
+    width: 95vw;
+    height: 85vh;
+
+    border: 1px solid black;
+
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.w1,
+.w2,
+.wl
+{
+    width: 30vw;
+    height: 30vh;
+
+    border: 1px solid grey;
+}
+
+.fightlog
+{
+    width: 70vw;
+    height: 50vh;
+    overflow-y: scroll;
+    border: 1px solid grey;
+}
+
+.warrior {
+  color: red;
+}
+
+.warlock {
+  color: blue;
+}
