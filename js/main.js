@@ -1,3 +1,4 @@
+// object constructor
 function warrior(name, atkDamage, defense, hitPoints) {
   this.name = name,
     this.atkDamage = atkDamage,
@@ -5,6 +6,7 @@ function warrior(name, atkDamage, defense, hitPoints) {
     this.hitPoints = hitPoints,
     this.attackEnemy = function(enemy) {
       if (this.hitPoints > 0) {
+        //checks if defender's defense is higher than attacker's attack
         if (this.atkDamage - enemy.defense) {
           enemy.hitPoints -= this.atkDamage - enemy.defense;
         }
@@ -12,18 +14,21 @@ function warrior(name, atkDamage, defense, hitPoints) {
         this.autoScroll();
       }
     },
+    // object method to display character's status
   this.displayWarrior = function(target) {
       Object.values(this).forEach(function(elem, index) {
         $(target).eq(index).text(elem);
       });
     },
     this.autoScroll = function() {
+      // autoscrolls when .fightlog is too tall
       $(".fightlog").animate({
         scrollTop: $(".fightlog").get(0).scrollHeight
       }, 200);
     }
 }
 
+// object constructor
 function warlock(name, atkDamage, defense, hitPoints, manaPoints) {
   this.name = name,
     this.atkDamage = atkDamage,
@@ -38,12 +43,18 @@ function warlock(name, atkDamage, defense, hitPoints, manaPoints) {
     },
     this.attackEnemy = function(enemy1, enemy2) {
       if (this.hitPoints > 0) {
-        if (this.manaPoints > 10 && this.hitPoints <= 5) {
+        // checks if hp are low and mana is sufficient
+        if (this.manaPoints >= 10 && this.hitPoints <= 5) {
           this.manaPoints -= 10;
           this.hitPoints += 10;
           $(".fightlog").append("<p class='warlock'>" + this.name + " heals himself for 10 hitpoints.</p>");
           this.autoScroll();
         }
+        else if (this.manaPoints < 10 && this.hitPoints <=5){
+          $(".fightlog").append("<p class='warlock'>" + this.name + " has no more mana.</p>");
+          this.autoScroll();
+        }
+        // attacks a random ennemy
         enemy = Math.floor(Math.random() * 2) ? enemy1 : enemy2;
         if (this.atkDamage - enemy.defense > 0) {
           enemy.hitPoints -= this.atkDamage - enemy.defense;
